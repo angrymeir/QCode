@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "qcode"
+version = "0.1.0"
+description = "Implementations of the techniques learned in the Quantum Computing Lecture @TUM"
+authors = ["Florian Angermeir <florian.angermeir@tum.de>"]
+license = "GNU General Public License v3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
