@@ -33,4 +33,5 @@ jobs:
         poetry run python3 -m pytest --cov=src --cov-report=xml tests/
     - name: Upload coverage to codecov
       uses: codecov/codecov-action@v3
-      flags: unittests
+      with:
+        flags: unittests
