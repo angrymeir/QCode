@@ -30,4 +30,7 @@ jobs:
         poetry install --sync
     - name: Test with pytest
       run: |
-        poetry run python3 -m pytest --cov=src tests/
+        poetry run python3 -m pytest --cov=src --cov-report=xml tests/
+    - name: Upload coverage to codecov
+      uses: codecov/codecov-action@v3
+      flags: unittests
