@@ -30,4 +30,4 @@ jobs:
         poetry install --sync
     - name: Test with pytest
       run: |
-        pytest
+        poetry run python3 -m pytest
