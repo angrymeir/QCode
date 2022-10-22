@@ -29,7 +29,7 @@ class Vector:
 
     def __rmul__(self, b):
         if type(b) == Vector:
-            return self.__mul__(scalar)
+            return self.__mul__(b)
         elif type(b) in [int, float]:
             return [val * b for val in self.values]
         elif type(b) == Matrix:
