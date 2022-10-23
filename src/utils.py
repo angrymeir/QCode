@@ -135,7 +135,9 @@ class Matrix:
 
     def is_normal(self):
         return Matrix(self.adjoint()*self) == Matrix(self * self.adjoint())
-        
+       
+    def is_orthogonal_projection_matrix(self):
+        return self.is_hermitian() and Matrix(self*self) == self
 
     def __add__(self, b):
         self.check_dimensions(b)

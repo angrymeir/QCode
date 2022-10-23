@@ -348,3 +348,17 @@ class TestMatrix(unittest.TestCase):
         m = Matrix(value)
 
         self.assertFalse(m.is_normal())
+
+    def test_matrix_is_orthogonal_projection_matrix(self):
+        value = [[1,0], [0,0]]
+
+        m = Matrix(value)
+
+        self.assertTrue(m.is_orthogonal_projection_matrix())
+
+    def test_matrix_is_not_orthogonal_projection_matrix(self):
+        value = [[1,2], [0,0]]
+
+        m = Matrix(value)
+
+        self.assertFalse(m.is_orthogonal_projection_matrix())
