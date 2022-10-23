@@ -118,6 +118,8 @@ class Matrix:
         return Matrix(self.transpose())
 
     def determinant(self):
+        if self.dimension('row') == 2:
+            return self.values[0][0]*self.values[1][1] - self.values[0][1]*self.values[1][0]
         result = 0
         for i in range(self.dimension('row')):
             tmp_result = 1

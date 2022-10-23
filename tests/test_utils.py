@@ -371,3 +371,17 @@ class TestMatrix(unittest.TestCase):
         result = m.determinant()
 
         self.assertEqual(correct_result, result)
+
+    def test_is_invertible(self):
+        value = [[1,1], [1,0]]
+
+        m = Matrix(value)
+
+        self.assertTrue(m.is_invertible())
+
+    def test_is_not_invertible(self):
+        value = [[1,1], [1,1]]
+
+        m = Matrix(value)
+
+        self.assertFalse(m.is_invertible())
