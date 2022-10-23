@@ -117,8 +117,22 @@ class Matrix:
             return Matrix(Matrix(new_matrix).transpose())
         return Matrix(self.transpose())
 
+    def is_identity(self):
+        for i in range(self.dimension('row')):
+            for j in range(self.dimension('column')):
+                if i != j and self.values[j][i] != 0:
+                    return False
+                if i == j and self.values[j][i] != 1:
+                    return False
+        return True
+
     def is_hermitian(self):
         return self.values == self.adjoint().values
+
+    def is_unitary(self):
+        result = Matrix(self.adjoint()*self)
+        return result.is_identity()
+
 
     def __add__(self, b):
         self.check_dimensions(b)
