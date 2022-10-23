@@ -372,6 +372,25 @@ class TestMatrix(unittest.TestCase):
 
         self.assertEqual(correct_result, result)
 
+    def test_matrix_determinant_transpose(self):
+        value = [[6, 4, 2], [1,-2,8], [1,5,7]]
+        m1 = Matrix(value)
+        m2 = Matrix(value)
+
+        self.assertEqual(m1.determinant(), Matrix(m2.transpose()).determinant())
+
+    def test_matrix_determinant_multiplication(self):
+        value1 = [[6, 4, 2], [1,-2,8], [1,5,7]]
+        value2 = [[1, 4, 4], [1,-5,8], [1,3,7]]
+
+        m1 = Matrix(value1)
+        m2 = Matrix(value2)
+        result1 = Matrix(m1*m2).determinant()
+        result2 = m1.determinant()*m2.determinant()
+
+        self.assertEqual(result1, result2)
+
+
     def test_is_invertible(self):
         value = [[1,1], [1,0]]
 
