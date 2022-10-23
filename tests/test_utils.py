@@ -13,7 +13,7 @@ class TestComplexNumber(unittest.TestCase):
     def test_complex_number_addition(self):
         real_1,comp_1 = 3,2
         real_2,comp_2 = 1,7
-        correct_result = (4,9)
+        correct_result = ComplexNumber(4,9)
 
         c1 = ComplexNumber(real_1, comp_1)
         c2 = ComplexNumber(real_2, comp_2)
@@ -31,7 +31,7 @@ class TestComplexNumber(unittest.TestCase):
     def test_complex_number_multiplication(self):
         real_1,comp_1 = 3,2
         real_2,comp_2 = 1,7
-        correct_result = (-11,23)
+        correct_result = ComplexNumber(-11,23)
 
         c1 = ComplexNumber(real_1, comp_1)
         c2 = ComplexNumber(real_2, comp_2)
@@ -48,7 +48,7 @@ class TestComplexNumber(unittest.TestCase):
 
     def test_complex_number_conjugate(self):
         real,comp = 3,2
-        correct_result = (3,-2)
+        correct_result = ComplexNumber(3,-2)
 
         c = ComplexNumber(real, comp)
         result = c.conjugate()
@@ -168,6 +168,28 @@ class TestVector(unittest.TestCase):
         v = Vector(value)
 
         self.assertRaises(NotImplementedError, v.__rmul__, "LOLWUT")
+
+    def test_vector_inner_product_real_numbers(self):
+        value1 = [1,2]
+        value2 = [2,3]
+        correct_result = 8
+
+        v1 = Vector(value1)
+        v2 = Vector(value2)
+        result = v1.inner_product(v2)
+
+        self.assertEqual(correct_result, result)
+
+    def test_vector_inner_product_complex_numbers(self):
+        value1 = [ComplexNumber(1,2),ComplexNumber(2,3)]
+        value2 = [ComplexNumber(4,5),ComplexNumber(6,7)]
+        correct_result = ComplexNumber(47,-7)
+
+        v1 = Vector(value1)
+        v2 = Vector(value2)
+        result = v1.inner_product(v2)
+
+        self.assertEqual(correct_result, result)
 
 
 class TestMatrix(unittest.TestCase):

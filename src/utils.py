@@ -6,19 +6,24 @@ class ComplexNumber:
         self.complex_part = complex_part
 
     def conjugate(self):
-        return self.real_part, self.complex_part * -1
+        return ComplexNumber(self.real_part, self.complex_part * -1)
 
     def __add__(self, b):
         if not type(b) == ComplexNumber:
             raise TypeError
-        return self.real_part + b.real_part, self.complex_part + b.complex_part
+        return ComplexNumber(self.real_part + b.real_part, self.complex_part + b.complex_part)
 
     def __mul__(self, b):
         if not type(b) == ComplexNumber:
             raise TypeError
         real_part = self.real_part*b.real_part - self.complex_part*b.complex_part
         complex_part = self.real_part*b.complex_part + self.complex_part*b.real_part
-        return real_part, complex_part
+        return ComplexNumber(real_part, complex_part)
+
+    def __eq__(self, b):
+        if isinstance(self, b.__class__):
+            return self.real_part == b.real_part and self.complex_part == b.complex_part
+        return False
 
 class Vector:
     def __init__(self, values:list):
@@ -59,6 +64,16 @@ class Vector:
     def dimension(self):
         return len(self.values)
 
+    def inner_product(self, b):
+        if self.dimension() != b.dimension():
+            raise ValueError('Dimensions of vectors do not match: {} and {}'.format(self.dimension(), b.dimension())) 
+        if type(self.values[0]) == ComplexNumber:
+            result = ComplexNumber(0,0)
+            for v1,v2 in zip(self.values, b.values):
+                result += (v1.conjugate()*v2)
+            return result
+        else:
+            return sum([v1*v2 for v1,v2 in zip(self.values, b.values)])
 
 class Matrix:
     def __init__(self, values):
