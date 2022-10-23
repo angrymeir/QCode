@@ -1,5 +1,60 @@
 import unittest
-from src.utils import Vector, Matrix
+from src.utils import Vector, Matrix, ComplexNumber
+
+class TestComplexNumber(unittest.TestCase):
+    def test_complex_number_creation(self):
+        real, comp = 2,3
+
+        c = ComplexNumber(real, comp)
+
+        self.assertEqual(c.real_part, real)
+        self.assertEqual(c.complex_part, comp)
+
+    def test_complex_number_addition(self):
+        real_1,comp_1 = 3,2
+        real_2,comp_2 = 1,7
+        correct_result = (4,9)
+
+        c1 = ComplexNumber(real_1, comp_1)
+        c2 = ComplexNumber(real_2, comp_2)
+        result = c1 + c2
+
+        self.assertEqual(correct_result, result)
+
+    def test_complex_number_addition_incorrect(self):
+        real,comp = 3,2
+
+        c = ComplexNumber(real, comp)
+
+        self.assertRaises(TypeError, c.__add__, 2)
+
+    def test_complex_number_multiplication(self):
+        real_1,comp_1 = 3,2
+        real_2,comp_2 = 1,7
+        correct_result = (-11,23)
+
+        c1 = ComplexNumber(real_1, comp_1)
+        c2 = ComplexNumber(real_2, comp_2)
+        result = c1 * c2
+
+        self.assertEqual(correct_result, result)
+
+    def test_complex_number_multiplication_incorrect(self):
+        real,comp = 3,2
+
+        c = ComplexNumber(real, comp)
+
+        self.assertRaises(TypeError, c.__mul__, 2)
+
+    def test_complex_number_conjugate(self):
+        real,comp = 3,2
+        correct_result = (3,-2)
+
+        c = ComplexNumber(real, comp)
+        result = c.conjugate()
+
+        self.assertEqual(correct_result, result)
+
 
 class TestVector(unittest.TestCase):
 

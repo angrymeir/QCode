@@ -1,5 +1,25 @@
 from itertools import groupby
 
+class ComplexNumber:
+    def __init__(self, real_part, complex_part):
+        self.real_part = real_part
+        self.complex_part = complex_part
+
+    def conjugate(self):
+        return self.real_part, self.complex_part * -1
+
+    def __add__(self, b):
+        if not type(b) == ComplexNumber:
+            raise TypeError
+        return self.real_part + b.real_part, self.complex_part + b.complex_part
+
+    def __mul__(self, b):
+        if not type(b) == ComplexNumber:
+            raise TypeError
+        real_part = self.real_part*b.real_part - self.complex_part*b.complex_part
+        complex_part = self.real_part*b.complex_part + self.complex_part*b.real_part
+        return real_part, complex_part
+
 class Vector:
     def __init__(self, values:list):
         self.values = values
