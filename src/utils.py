@@ -133,6 +133,9 @@ class Matrix:
         result = Matrix(self.adjoint()*self)
         return result.is_identity()
 
+    def is_normal(self):
+        return Matrix(self.adjoint()*self) == Matrix(self * self.adjoint())
+        
 
     def __add__(self, b):
         self.check_dimensions(b)

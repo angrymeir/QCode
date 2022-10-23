@@ -328,11 +328,23 @@ class TestMatrix(unittest.TestCase):
 
         self.assertTrue(m.is_unitary())
 
-    def test_matrix_is_unitary(self):
+    def test_matrix_is_not_unitary(self):
         value = [[1,1], [0,1]]
 
         m = Matrix(value)
 
         self.assertFalse(m.is_unitary())
 
+    def test_matrix_is_normal(self):
+        value = [[1,0], [0,1]]
 
+        m = Matrix(value)
+
+        self.assertTrue(m.is_normal())
+
+    def test_matrix_is_not_normal(self):
+        value = [[1,2], [0,1]]
+
+        m = Matrix(value)
+
+        self.assertFalse(m.is_normal())
