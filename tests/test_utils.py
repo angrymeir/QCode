@@ -362,3 +362,12 @@ class TestMatrix(unittest.TestCase):
         m = Matrix(value)
 
         self.assertFalse(m.is_orthogonal_projection_matrix())
+
+    def test_matrix_determinant(self):
+        value = [[6, 4, 2], [1,-2,8], [1,5,7]]
+        correct_result = -306
+
+        m = Matrix(value)
+        result = m.determinant()
+
+        self.assertEqual(correct_result, result)

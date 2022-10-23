@@ -117,6 +117,27 @@ class Matrix:
             return Matrix(Matrix(new_matrix).transpose())
         return Matrix(self.transpose())
 
+    def determinant(self):
+        result = 0
+        for i in range(self.dimension('row')):
+            tmp_result = 1
+            for ii in range(self.dimension('column')):
+                row_index = (i+ii)%self.dimension('row')
+                col_index = ii
+                value = self.values[row_index][col_index]
+                tmp_result *= value 
+            result += tmp_result
+        for i in range(self.dimension('row')):
+            tmp_result = 1
+            for ii in range(self.dimension('column')):
+                row_index = (i+ii)%self.dimension('row')
+                col_index = self.dimension('column')-1-ii
+                value = self.values[row_index][col_index]
+                tmp_result *= value
+            result -= tmp_result
+        return result
+
+
     def is_identity(self):
         for i in range(self.dimension('row')):
             for j in range(self.dimension('column')):
@@ -138,6 +159,9 @@ class Matrix:
        
     def is_orthogonal_projection_matrix(self):
         return self.is_hermitian() and Matrix(self*self) == self
+
+    def is_invertible(self):
+        return self.determinant() != 0
 
     def __add__(self, b):
         self.check_dimensions(b)
