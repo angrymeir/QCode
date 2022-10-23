@@ -106,6 +106,20 @@ class Matrix:
         col = self.dimension('column')
         return [[self.values[j][i] for j in range(row)] for i in range(col)]
 
+    def adjoint(self):
+        new_matrix = []
+        if type(self.values[0][0]) == ComplexNumber:
+            for column in self.values:
+                new_col = []
+                for entry in column:
+                    new_col.append(entry.conjugate())
+                new_matrix.append(new_col)
+            return Matrix(Matrix(new_matrix).transpose())
+        return Matrix(self.transpose())
+
+    def is_hermitian(self):
+        return self.values == self.adjoint().values
+
     def __add__(self, b):
         self.check_dimensions(b)
         result = []
@@ -139,3 +153,8 @@ class Matrix:
             return result
         else:
             raise NotImplementedError
+
+    def __eq__(self, b):
+        if isinstance(self, b.__class__):
+            return self.values == b.values
+        return False

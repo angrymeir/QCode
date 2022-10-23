@@ -290,3 +290,20 @@ class TestMatrix(unittest.TestCase):
         m = Matrix(value)
 
         self.assertRaises(NotImplementedError, m.__mul__, "LOLWUT")
+
+    def test_matrix_adjoint(self):
+        value = [[ComplexNumber(1,2), ComplexNumber(1,2)], [ComplexNumber(3,4), ComplexNumber(3,4)]]
+        correct_result = Matrix([[ComplexNumber(1,-2), ComplexNumber(3,-4)], [ComplexNumber(1,-2), ComplexNumber(3,-4)]])
+
+        m = Matrix(value)
+        result = m.adjoint()
+
+        self.assertEqual(correct_result, result)
+
+    def test_matrix_is_hermitian(self):
+        value = [[1,0], [0,1]]
+
+        m = Matrix(value)
+
+        self.assertTrue(m.is_hermitian())
+
