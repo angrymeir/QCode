@@ -26,7 +26,7 @@ class TestComplexNumber(unittest.TestCase):
 
         c = ComplexNumber(real, comp)
 
-        self.assertRaises(TypeError, c.__add__, 2)
+        self.assertRaises(TypeError, c.__add__, "asdf")
 
     def test_complex_number_multiplication(self):
         real_1,comp_1 = 3,2
@@ -44,7 +44,7 @@ class TestComplexNumber(unittest.TestCase):
 
         c = ComplexNumber(real, comp)
 
-        self.assertRaises(TypeError, c.__mul__, 2)
+        self.assertRaises(TypeError, c.__mul__, 2.0)
 
     def test_complex_number_conjugate(self):
         real,comp = 3,2

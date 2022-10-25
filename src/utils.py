@@ -1,5 +1,6 @@
 from itertools import groupby
 
+
 class ComplexNumber:
     def __init__(self, real_part, complex_part):
         self.real_part = real_part
@@ -9,21 +10,45 @@ class ComplexNumber:
         return ComplexNumber(self.real_part, self.complex_part * -1)
 
     def __add__(self, b):
-        if not type(b) == ComplexNumber:
+        if type(b) == int:
+            return ComplexNumber(self.real_part + b, self.complex_part)
+        elif type(b) == ComplexNumber:
+            return ComplexNumber(self.real_part + b.real_part, self.complex_part + b.complex_part)
+        else:
             raise TypeError
-        return ComplexNumber(self.real_part + b.real_part, self.complex_part + b.complex_part)
+
+    def __radd__(self, b):
+        return self.__add__(b)
 
     def __mul__(self, b):
-        if not type(b) == ComplexNumber:
+        if type(b) == int:
+            real_part = self.real_part*b
+            complex_part = self.complex_part*b
+        elif type(b) == ComplexNumber:
+            real_part = self.real_part*b.real_part - self.complex_part*b.complex_part
+            complex_part = self.real_part*b.complex_part + self.complex_part*b.real_part
+        else:
             raise TypeError
-        real_part = self.real_part*b.real_part - self.complex_part*b.complex_part
-        complex_part = self.real_part*b.complex_part + self.complex_part*b.real_part
+        return ComplexNumber(real_part, complex_part)
+
+    def __rmul__(self, b):
+        if type(b) == int:
+            real_part = self.real_part*b
+            complex_part = self.complex_part*b
+        elif type(b) == ComplexNumber:
+            self.__mul__(b)
+        else:
+            raise TypeError
         return ComplexNumber(real_part, complex_part)
 
     def __eq__(self, b):
         if isinstance(self, b.__class__):
             return self.real_part == b.real_part and self.complex_part == b.complex_part
         return False
+
+    def __str__(self):
+        return "{} {}i".format(self.real_part, self.complex_part)
+
 
 class Vector:
     def __init__(self, values:list):
